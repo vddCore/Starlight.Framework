@@ -68,7 +68,7 @@ using System.Threading;
 using Starlight.Framework;
 using Starlight.Framework.Graphics;
 
-var displays = LedDisplay.Enumerate()[0];
+var displays = LedDisplay.Enumerate();
 var ddr = new DualDisplayRenderer();
 
 ddr.Arrange(
