@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Starlight.Framework", "Star
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Starlight.Framework.Test", "Starlight.Framework.Test\Starlight.Framework.Test.csproj", "{C40D231C-6E7B-434D-9EAF-27624D2255FE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hideous", "Hideous\Hideous\Hideous.csproj", "{833F6EC8-1A20-45BA-BDB3-6E41778A54F2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{C40D231C-6E7B-434D-9EAF-27624D2255FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C40D231C-6E7B-434D-9EAF-27624D2255FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C40D231C-6E7B-434D-9EAF-27624D2255FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{833F6EC8-1A20-45BA-BDB3-6E41778A54F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{833F6EC8-1A20-45BA-BDB3-6E41778A54F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{833F6EC8-1A20-45BA-BDB3-6E41778A54F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{833F6EC8-1A20-45BA-BDB3-6E41778A54F2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

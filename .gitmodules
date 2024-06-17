@@ -1,0 +1,3 @@
+[submodule "Hideous"]
+	path = Hideous
+	url = git@github.com:vddCore/Hideous.git

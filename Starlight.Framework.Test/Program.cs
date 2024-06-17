@@ -1,32 +1,47 @@
 ﻿using System;
 using System.Threading;
-using System.Threading.Tasks;
 using Starlight.Framework;
+using Starlight.Framework.Graphics;
 
-var modules = LedModule.Enumerate();
-var left = modules[1];
-var right = modules[0];
-var rendererL = new SingleModuleRenderer(left);
-var rendererR = new SingleModuleRenderer(right);
-var t = 0;
+var modules = LedDisplay.Enumerate();
+var left = modules[0];
+var right = modules[1];
 
-await right.SetAnimationState(false);
-await left.SetAnimationState(false);
+// left.SetGlobalDcScale(80);
+// right.SetGlobalDcScale(80);
 
+left.SetGlobalBrightness(128);
+right.SetGlobalBrightness(128);
+left.Clear();
+right.Clear();
+
+var ddr = new DualDisplayRenderer();
+ddr.Arrange(left, right);
+
+var lsdr = new SingleDisplayRenderer(left);
+var rsdr = new SingleDisplayRenderer(right);
+
+int t = 0;
 while (true)
 {
-    for (var y = 0; y < LedModule.Height; y++)
-    for (var x = 0; x < LedModule.Width; x++)
+    t++;
+    
+    for (byte y = 0; y < ddr.Height; y++)
     {
-        var color = (byte)(
-            63.0 + 63.0 * (Math.Sin(x + t / 8.0) + Math.Cos(y + t / 4.0)));
-        await rendererL.SetXY(x, y, color);
-        color = (byte)(
-            63.0 + 63.0 * (Math.Sin(x + t / 8.0) + Math.Cos(y + t / 4.0)));
-        await rendererR.SetXY(x, y, color);
+        for (byte x = 0; x < ddr.Width; x++)
+        {
+            var color = (byte)(32.0 * Math.Sin(Math.Sqrt(((x + 0.5) - ddr.Width / 2.0) * ((x + 0.5) - ddr.Width / 2.0) + (y - ddr.Height / 2.0) * (y - ddr.Height / 2.0)) + t / 4.0));
+            ddr.DrawPixel(x, y, color);
+            
+            // var lcolor = (byte)(32.0 * Math.Sin(Math.Sqrt((x - lsdr.Width / 2.0) * (x - lsdr.Width / 2.0) + (y - lsdr.Height / 2.0) * (y - lsdr.Height / 2.0)) + t / 4.0));
+            // var rcolor = (byte)(32.0 * Math.Sin(Math.Sqrt((x - lsdr.Width / 2.0) * (x - lsdr.Width / 2.0) + (y - lsdr.Height / 2.0) * (y - lsdr.Height / 2.0)) + t / 4.0));
+            //
+            // lsdr.DrawPixel(x, y, lcolor);
+            // rsdr.DrawPixel(x, y, rcolor);
+        }
     }
 
-    await rendererL.Update();
-    await rendererR.Update();
-    t += 10;
+    ddr.PushFramebuffer();
+    // lsdr.PushFramebuffer();
+    // rsdr.PushFramebuffer();
 }
