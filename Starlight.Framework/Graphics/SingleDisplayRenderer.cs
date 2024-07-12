@@ -19,7 +19,7 @@ public class SingleDisplayRenderer : IRenderer
 
     public void Clear()
     {
-        _display.Clear();
+        Array.Clear(_framebuffer);
     }
 
     public void DrawPixel(int x, int y, byte value)
