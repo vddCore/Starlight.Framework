@@ -1,6 +1,7 @@
 ﻿namespace Starlight.Framework.Graphics;
 
 using System;
+using System.Drawing;
 using System.Numerics;
 
 public class SingleDisplayRenderer : IRenderer
@@ -17,10 +18,20 @@ public class SingleDisplayRenderer : IRenderer
         _framebuffer = new byte[Width * Height];
     }
 
-    public void Clear()
+    public void Invert(Rectangle area)
     {
-        Array.Clear(_framebuffer);
+        for (var y = area.Y; y < Height && y < area.Height; y++)
+        for (var x = area.X; x < Width && x < area.Width; x++)
+        {
+            _framebuffer[y * Width + x] = (byte)(255 - _framebuffer[y * Width + x]);
+        }
     }
+
+    public void Invert()
+        => Invert(new(0, 0, Width, Height));
+
+    public void Clear()
+        => Array.Clear(_framebuffer);
 
     public void DrawPixel(int x, int y, byte value)
     {
